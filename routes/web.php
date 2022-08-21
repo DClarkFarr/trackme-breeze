@@ -16,8 +16,14 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('/profile', function () {
+        return Inertia::render('Profile');
+    })->name('profile');
+});
 
 require __DIR__ . '/auth.php';

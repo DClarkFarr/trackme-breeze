@@ -7,6 +7,9 @@ import ResponsiveNavLink from "@/Components/Nav/ResponsiveNavLink";
 import { AuthObject } from "@/Types/types";
 import useAccountsHook from "@/Hooks/useAccountsHook";
 
+import UserIcon from "~icons/fa-solid/user";
+import SignOutIcon from "~icons/fa-solid/sign-out-alt";
+
 export default function Authenticated({
     auth,
     header,
@@ -67,12 +70,25 @@ export default function Authenticated({
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
+                                        <div className="border border-t my-4"></div>
+                                        <Dropdown.Link
+                                            href={route("profile")}
+                                            as="a"
+                                        >
+                                            <div className="flex gap-x-4 items-center">
+                                                <UserIcon fontSize={12} />
+                                                Profile
+                                            </div>
+                                        </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            <div className="flex gap-x-4 items-center">
+                                                <SignOutIcon fontSize={12} />
+                                                Log Out
+                                            </div>
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
