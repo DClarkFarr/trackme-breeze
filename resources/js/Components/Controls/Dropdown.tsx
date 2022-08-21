@@ -1,10 +1,15 @@
-import React, { useState, useContext, Fragment } from 'react';
-import { Link } from '@inertiajs/inertia-react';
-import { Transition } from '@headlessui/react';
+import React, { useState, useContext, Fragment, ReactNode } from "react";
+import { Link } from "@inertiajs/inertia-react";
+import { Transition } from "@headlessui/react";
 
-const DropDownContext = React.createContext();
+type DropdownState = {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    toggleOpen: () => void;
+};
+const DropDownContext = React.createContext<DropdownState>({} as DropdownState);
 
-const Dropdown = ({ children }) => {
+const Dropdown = ({ children }: { children: ReactNode }) => {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -18,33 +23,48 @@ const Dropdown = ({ children }) => {
     );
 };
 
-const Trigger = ({ children }) => {
+const Trigger = ({ children }: { children: ReactNode }) => {
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
     return (
         <>
             <div onClick={toggleOpen}>{children}</div>
 
-            {open && <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>}
+            {open && (
+                <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setOpen(false)}
+                ></div>
+            )}
         </>
     );
 };
 
-const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-white', children }) => {
+const Content = ({
+    align = "right",
+    width = "48",
+    contentClasses = "py-1 bg-white",
+    children,
+}: {
+    align?: "left" | "right";
+    width?: string;
+    contentClasses?: string;
+    children: ReactNode;
+}) => {
     const { open, setOpen } = useContext(DropDownContext);
 
-    let alignmentClasses = 'origin-top';
+    let alignmentClasses = "origin-top";
 
-    if (align === 'left') {
-        alignmentClasses = 'origin-top-left left-0';
-    } else if (align === 'right') {
-        alignmentClasses = 'origin-top-right right-0';
+    if (align === "left") {
+        alignmentClasses = "origin-top-left left-0";
+    } else if (align === "right") {
+        alignmentClasses = "origin-top-right right-0";
     }
 
-    let widthClasses = '';
+    let widthClasses = "";
 
-    if (width === '48') {
-        widthClasses = 'w-48';
+    if (width === "48") {
+        widthClasses = "w-48";
     }
 
     return (
@@ -63,14 +83,31 @@ const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-whit
                     className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
-                    <div className={`rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses}>{children}</div>
+                    <div
+                        className={
+                            `rounded-md ring-1 ring-black ring-opacity-5 ` +
+                            contentClasses
+                        }
+                    >
+                        {children}
+                    </div>
                 </div>
             </Transition>
         </>
     );
 };
 
-const DropdownLink = ({ href, method = 'post', as = 'a', children }) => {
+const DropdownLink = ({
+    href,
+    method = "post",
+    as = "a",
+    children,
+}: {
+    href: string;
+    method?: string;
+    as?: "a" | "button";
+    children: ReactNode;
+}) => {
     return (
         <Link
             href={href}

@@ -1,23 +1,24 @@
-import React from 'react';
-import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import InputError from '@/Components/InputError';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import { ChangeEvent } from "react";
+import route from "ziggy-js";
+import Button from "@/Components/Buttons/Button";
+import Guest from "@/Layouts/Guest";
+import Input from "@/Components/Controls/Input";
+import InputError from "@/Components/Messages/InputError";
+import { Head, useForm } from "@inertiajs/inertia-react";
 
-export default function ForgotPassword({ status }) {
+export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
+        email: "",
     });
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setData(event.target.name as "email", event.target.value);
     };
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('password.email'));
+        post(route("password.email"));
     };
 
     return (
@@ -25,11 +26,16 @@ export default function ForgotPassword({ status }) {
             <Head title="Forgot Password" />
 
             <div className="mb-4 text-sm text-gray-500 leading-normal">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link that will allow you to choose a new one.
+                Forgot your password? No problem. Just let us know your email
+                address and we will email you a password reset link that will
+                allow you to choose a new one.
             </div>
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && (
+                <div className="mb-4 font-medium text-sm text-green-600">
+                    {status}
+                </div>
+            )}
 
             <form onSubmit={submit}>
                 <Input

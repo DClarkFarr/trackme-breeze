@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
-import Button from "@/Components/Button";
-import Checkbox from "@/Components/Checkbox";
+import { ChangeEvent, useEffect } from "react";
+import route from "ziggy-js";
+import Button from "@/Components/Buttons/Button";
+import Checkbox from "@/Components/Controls/Checkbox";
 import Guest from "@/Layouts/Guest";
-import Input from "@/Components/Input";
-import InputError from "@/Components/InputError";
-import Label from "@/Components/Label";
+import Input from "@/Components/Controls/Input";
+import InputError from "@/Components/Messages/InputError";
+import Label from "@/Components/Messages/Label";
 import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({
+    status,
+    canResetPassword,
+}: {
+    status?: string;
+    canResetPassword?: boolean;
+}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -20,11 +27,13 @@ export default function Login({ status, canResetPassword }) {
         };
     }, []);
 
-    const onHandleChange = (event) => {
+    const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setData(
-            event.target.name,
+            event.target.name as keyof typeof data,
             event.target.type === "checkbox"
                 ? event.target.checked
+                    ? "1"
+                    : "0"
                 : event.target.value
         );
     };
@@ -102,7 +111,7 @@ export default function Login({ status, canResetPassword }) {
                     )}
 
                     <Button className="ml-4" processing={processing}>
-                        Log in 2
+                        Log in
                     </Button>
                 </div>
             </form>

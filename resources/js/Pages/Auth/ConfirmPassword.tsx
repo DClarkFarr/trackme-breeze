@@ -1,30 +1,31 @@
-import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import { ChangeEvent, useEffect } from "react";
+import route from "ziggy-js";
+import Button from "@/Components/Buttons/Button";
+import Guest from "@/Layouts/Guest";
+import Input from "@/Components/Controls/Input";
+import InputError from "@/Components/Messages/InputError";
+import Label from "@/Components/Messages/Label";
+import { Head, useForm } from "@inertiajs/inertia-react";
 
 export default function ConfirmPassword() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        password: '',
+        password: "",
     });
 
     useEffect(() => {
         return () => {
-            reset('password');
+            reset("password");
         };
     }, []);
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setData(event.target.name as "password", event.target.value);
     };
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('password.confirm'));
+        post(route("password.confirm"));
     };
 
     return (
@@ -32,7 +33,8 @@ export default function ConfirmPassword() {
             <Head title="Confirm Password" />
 
             <div className="mb-4 text-sm text-gray-600">
-                This is a secure area of the application. Please confirm your password before continuing.
+                This is a secure area of the application. Please confirm your
+                password before continuing.
             </div>
 
             <form onSubmit={submit}>

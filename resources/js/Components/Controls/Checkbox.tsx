@@ -1,6 +1,12 @@
-import React from 'react';
-
-export default function Checkbox({ name, value, handleChange }) {
+export default function Checkbox({
+    name,
+    value,
+    handleChange,
+}: {
+    name: string;
+    value: string;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
     return (
         <input
             type="checkbox"

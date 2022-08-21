@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function Input({
-    type = 'text',
+    type = "text",
     name,
     value,
     className,
@@ -9,11 +9,20 @@ export default function Input({
     required,
     isFocused,
     handleChange,
+}: {
+    type?: "text" | "email" | "password" | "number" | "search";
+    name: string;
+    value: string;
+    className?: string;
+    autoComplete?: string;
+    required?: boolean;
+    isFocused?: boolean;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-    const input = useRef();
+    const input = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-        if (isFocused) {
+        if (isFocused && input.current) {
             input.current.focus();
         }
     }, []);

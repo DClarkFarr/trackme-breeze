@@ -1,33 +1,41 @@
-import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { ChangeEvent, FormEvent, useEffect } from "react";
+import route from "ziggy-js";
+import Button from "@/Components/Buttons/Button";
+import Guest from "@/Layouts/Guest";
+import Input from "@/Components/Controls/Input";
+import InputError from "@/Components/Messages/InputError";
+import Label from "@/Components/Messages/Label";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
     });
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
+            reset("password", "password_confirmation");
         };
     }, []);
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+    const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setData(
+            event.target.name as keyof typeof data,
+            event.target.type === "checkbox"
+                ? event.target.checked
+                    ? "1"
+                    : "0"
+                : event.target.value
+        );
     };
 
-    const submit = (e) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route("register"));
     };
 
     return (
@@ -85,7 +93,10 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
+                    <Label
+                        forInput="password_confirmation"
+                        value="Confirm Password"
+                    />
 
                     <Input
                         type="password"
@@ -96,11 +107,17 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError
+                        message={errors.password_confirmation}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
+                    <Link
+                        href={route("login")}
+                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                    >
                         Already registered?
                     </Link>
 
