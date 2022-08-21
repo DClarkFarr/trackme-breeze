@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import route from "ziggy-js";
 import Button from "@/Components/Buttons/Button";
 import Checkbox from "@/Components/Controls/Checkbox";
@@ -38,7 +38,7 @@ export default function Login({
         );
     };
 
-    const submit = (e) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
 
         post(route("login"));
