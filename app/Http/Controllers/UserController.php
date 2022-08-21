@@ -10,7 +10,7 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $accounts = $user->accounts;
+        $accounts = $user->accounts()->with(['users'])->get();
 
         return $accounts->toArray();
     }

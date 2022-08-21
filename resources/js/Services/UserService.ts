@@ -1,4 +1,4 @@
-import { Account } from "@/Types/types";
+import { Account, AccountWithUsers } from "@/Types/types";
 import { AxiosHttpClient } from "./apiClient";
 
 const client = new AxiosHttpClient({
@@ -8,7 +8,7 @@ const client = new AxiosHttpClient({
 
 class UserService {
     static async getAccounts() {
-        return client.get<Account[]>("/account");
+        return client.get<AccountWithUsers[]>("/account");
     }
 }
 

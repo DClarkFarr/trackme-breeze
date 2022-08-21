@@ -1,8 +1,11 @@
 import Authenticated from "@/Layouts/Authenticated";
 import { Head } from "@inertiajs/inertia-react";
 import { AuthObject } from "@/Types/types";
+import useAccountsHook from "@/Hooks/useAccountsHook";
+import ManageAccount from "@/Components/Account/ManageAccount";
 
 export default function Account({ auth }: { auth: AuthObject }) {
+    const { activeAccount } = useAccountsHook();
     return (
         <Authenticated
             auth={auth}
@@ -14,9 +17,7 @@ export default function Account({ auth }: { auth: AuthObject }) {
         >
             <Head title="Account" />
 
-            <div className="p-6 bg-white border-b border-gray-200">
-                show accounts
-            </div>
+            {activeAccount && <ManageAccount account={activeAccount} />}
         </Authenticated>
     );
 }

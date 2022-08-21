@@ -32,7 +32,14 @@ class Account extends Model
             "id_user",
             "id",
             "id"
-        );
+        )->withPivot([
+            'role',
+            'status',
+            'status_at',
+            'created_at',
+            'updated_at',
+            'active'
+        ]);
     }
 
     /**
