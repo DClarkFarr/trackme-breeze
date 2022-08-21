@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/inertia-react";
 import { AuthObject } from "@/Types/types";
 
 export default function Dashboard({ auth }: { auth: AuthObject }) {
+    console.log("got auth", auth);
     return (
         <Authenticated
             auth={auth}

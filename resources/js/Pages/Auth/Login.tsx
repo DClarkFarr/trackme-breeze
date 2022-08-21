@@ -54,7 +54,7 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="mb-6">
                 <div>
                     <Label forInput="email" value="Email" />
 
@@ -115,6 +115,15 @@ export default function Login({
                     </Button>
                 </div>
             </form>
+
+            <div className="text-center">
+                <Link
+                    href={route("register")}
+                    className="text-sm text-gray-600 hover:text-gray-900"
+                >
+                    Create account?
+                </Link>
+            </div>
         </Guest>
     );
 }
