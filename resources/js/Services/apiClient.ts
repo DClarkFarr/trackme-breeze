@@ -66,7 +66,7 @@ export class AxiosHttpClient {
         return handleAxiosRequest<R>(this.instance.request(requestConfig));
     }
 
-    get<R extends object, D extends object | null>(
+    get<R extends object, D extends object | null = null>(
         path: string,
         data?: D,
         config: AxiosRequestConfig = {}
@@ -78,7 +78,7 @@ export class AxiosHttpClient {
             ...config,
         });
     }
-    post<R extends object, D extends object | null>(
+    post<R extends object, D extends object | null = null>(
         path: string,
         data?: D,
         config: AxiosRequestConfig = {}
@@ -90,7 +90,7 @@ export class AxiosHttpClient {
             ...config,
         });
     }
-    put<R extends object, D extends object | null>(
+    put<R extends object, D extends object | null = null>(
         path: string,
         data?: D,
         config: AxiosRequestConfig = {}
@@ -102,7 +102,7 @@ export class AxiosHttpClient {
             ...config,
         });
     }
-    patch<R extends object, D extends object | null>(
+    patch<R extends object, D extends object | null = null>(
         path: string,
         data?: D,
         config: AxiosRequestConfig = {}
@@ -114,7 +114,7 @@ export class AxiosHttpClient {
             ...config,
         });
     }
-    delete<R extends object, D extends object | null>(
+    delete<R extends object, D extends object | null = null>(
         path: string,
         data?: D,
         config: AxiosRequestConfig = {}

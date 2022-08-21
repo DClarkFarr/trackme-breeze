@@ -5,6 +5,7 @@ import ApplicationLogo from "@/Components/Assets/ApplicationLogo";
 import Dropdown from "@/Components/Controls/Dropdown";
 import ResponsiveNavLink from "@/Components/Nav/ResponsiveNavLink";
 import { AuthObject } from "@/Types/types";
+import useAccountsHook from "@/Hooks/useAccountsHook";
 
 export default function Authenticated({
     auth,
@@ -15,6 +16,8 @@ export default function Authenticated({
     header?: ReactNode;
     children?: ReactNode;
 }) {
+    const { activeAccount } = useAccountsHook();
+
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -41,6 +44,11 @@ export default function Authenticated({
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {auth.user.name}
+                                                {activeAccount && (
+                                                    <span className="px-1">
+                                                        / {activeAccount.name}
+                                                    </span>
+                                                )}
 
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -120,16 +128,18 @@ export default function Authenticated({
                         " sm:hidden"
                     }
                 >
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
                     <div className="pt-4 pb-1 border-t border-gray-200">
+                        {activeAccount && (
+                            <div className="px-4 mb-1">
+                                <div className="font-medium text-base text-gray-800">
+                                    Account
+                                </div>
+                                <div className="font-medium text-sm text-gray-500">
+                                    {activeAccount.name}
+                                </div>
+                            </div>
+                        )}
+
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">
                                 {auth.user.name}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::prefix('/user')->group(function () {
+        Route::get('/', function (Request $request) {
+            return $request->user();
+        });
+
+        Route::get('/account', [UserController::class, 'getAccounts']);
+    });
+});
+
+Route::any('/', function () {
+    return response()->json(['message' => 'Route not found'], 404);
 });
