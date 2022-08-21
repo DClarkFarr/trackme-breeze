@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import route from "ziggy-js";
 import Button from "@/Components/Buttons/Button";
 import Guest from "@/Layouts/Guest";
@@ -15,7 +15,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
         setData(event.target.name as "email", event.target.value);
     };
 
-    const submit = (e) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
 
         post(route("password.email"));
