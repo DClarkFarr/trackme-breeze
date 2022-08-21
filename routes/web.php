@@ -24,6 +24,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', function () {
         return Inertia::render('Profile');
     })->name('profile');
+
+    Route::get('/account', function () {
+        return Inertia::render('Account');
+    })->name('account');
 });
 
 require __DIR__ . '/auth.php';

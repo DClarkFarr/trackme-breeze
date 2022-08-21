@@ -70,6 +70,12 @@ export default function Authenticated({
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
+                                        <Dropdown.Link
+                                            href={route("account")}
+                                            as="a"
+                                        >
+                                            Account
+                                        </Dropdown.Link>
                                         <div className="border border-t my-4"></div>
                                         <Dropdown.Link
                                             href={route("profile")}
