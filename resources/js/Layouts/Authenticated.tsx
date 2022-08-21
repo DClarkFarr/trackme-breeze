@@ -3,7 +3,6 @@ import { Link } from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import ApplicationLogo from "@/Components/Assets/ApplicationLogo";
 import Dropdown from "@/Components/Controls/Dropdown";
-import NavLink from "@/Components/Nav/NavLink";
 import ResponsiveNavLink from "@/Components/Nav/ResponsiveNavLink";
 import { AuthObject } from "@/Types/types";
 
@@ -22,22 +21,13 @@ export default function Authenticated({
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto text-gray-500" />
                                 </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </NavLink>
                             </div>
                         </div>
 
@@ -164,13 +154,21 @@ export default function Authenticated({
 
             {header && (
                 <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-screen-2xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main>{children}</main>
+            <main>
+                <div className="py-6">
+                    <div className="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            {children}
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import Button from "@/Components/Buttons/Button";
 import Guest from "@/Layouts/Guest";
 import Input from "@/Components/Controls/Input";
 import InputError from "@/Components/Messages/InputError";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -37,7 +37,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="mb-6">
                 <Input
                     type="text"
                     name="email"
@@ -55,6 +55,15 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </Button>
                 </div>
             </form>
+
+            <div className="text-center">
+                <Link
+                    href={route("login")}
+                    className="underline text-sm text-gray-600 hover:text-gray-900"
+                >
+                    Back to Login
+                </Link>
+            </div>
         </Guest>
     );
 }

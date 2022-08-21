@@ -1,3 +1,3 @@
 export default function ApplicationLogo({ className }: { className?: string }) {
-    return <span className={`text-bold font-bold ${className}`}>BT</span>;
+    return <span className={`font-bold text-2xl ${className}`}>BT</span>;
 }
