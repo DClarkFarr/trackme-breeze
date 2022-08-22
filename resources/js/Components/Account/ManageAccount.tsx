@@ -37,7 +37,7 @@ const ManageAccount = ({ account }: { account: AccountWithUsers }) => {
                     <h4 className="font-semibold text-lg mb-2">
                         Manage Admins
                     </h4>
-                    <table className="table w-full mb-2">
+                    <table className="table table-md w-full mb-2">
                         <thead>
                             <tr>
                                 <th className="text-left">Name</th>

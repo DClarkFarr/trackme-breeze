@@ -1,11 +1,13 @@
 export default function InputError({
     message,
+    touched,
     className = "",
 }: {
-    message: string;
+    touched?: boolean;
+    message?: string;
     className?: string;
 }) {
-    return message ? (
+    return message && (touched === undefined || touched) ? (
         <p className={"text-sm text-red-600 " + className}>{message}</p>
     ) : null;
 }

@@ -21,6 +21,7 @@ Route::middleware(['web', 'auth'])->group(function () {
             return $request->user();
         });
 
+        Route::post("/account/{id}/invite", [UserController::class, 'inviteAdmin'])->name('user.invite-admin');
         Route::get('/account', [UserController::class, 'getAccounts']);
     });
 });

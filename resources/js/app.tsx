@@ -1,4 +1,4 @@
-import "../css/app.css";
+import "../css/app.scss";
 
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";

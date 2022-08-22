@@ -32,6 +32,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "formik": "^2.2.9",
         "react-query": "^3.39.2",
         "ziggy-js": "^1.4.6"
     }
